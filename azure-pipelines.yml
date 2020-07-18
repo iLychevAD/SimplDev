@@ -15,16 +15,12 @@ jobs:
     inputs:
       packageType: 'sdk'
       version: '2.2.401'
-  - script: dotnet build  --output $(Build.ArtifactStagingDirectory) ./SimplCommerce.sln
+  - script: dotnet build
     displayName: 'dotnet build'
   - script: ./run-tests.sh
     displayName: 'run tests'
-  - task: PublishTestResults@2
-    displayName: 'Publish Test Results **/*.trx'
-    condition: succeededOrFailed()
-    inputs:
-      testResultsFormat: VSTest
-      testResultsFiles: '**/*.trx'
+  - script: dotnet publish --output $(Build.ArtifactStagingDirectory)
+    displayName: 'dotnet publish'
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
