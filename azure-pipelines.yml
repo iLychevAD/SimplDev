@@ -17,10 +17,15 @@ jobs:
       version: '2.2.401'
   - script: dotnet build
     displayName: 'dotnet build'
-  - script: ./run-tests.sh
-    displayName: 'run tests'
+
   - script: dotnet publish --output $(Build.ArtifactStagingDirectory)
     displayName: 'dotnet publish'
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: publish
+      publishWebProjects: True
+      arguments: '--output $(Build.ArtifactStagingDirectory)'
+      zipAfterPublish: True
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
