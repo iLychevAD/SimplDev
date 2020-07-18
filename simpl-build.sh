@@ -5,6 +5,8 @@ sed -i'' -e 's|<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServe
 sed -i'' -e 's/UseSqlServer/UseNpgsql/' src/SimplCommerce.WebHost/Program.cs
 sed -i'' -e 's/UseSqlServer/UseNpgsql/' src/SimplCommerce.WebHost/Extensions/ServiceCollectionExtensions.cs
 
+sed -i'' -e "s/DB_CONNECTION_PLACEHOLDER/${DB_CONNECTION}/" src/SimplCommerce.WebHost/appsettings.json
+
 rm -rf src/SimplCommerce.WebHost/Migrations/*
 
 dotnet restore && dotnet build
