@@ -15,11 +15,11 @@ jobs:
     inputs:
       packageType: 'sdk'
       version: '2.2.401'
-  - script: dotnet build
+  - script: bash ./simpl-build.sh
     displayName: 'dotnet build'
+    env:
+      DB_CONNECTION: $(DB_CONNECTION)
 
-  - script: dotnet publish --output $(Build.ArtifactStagingDirectory)
-    displayName: 'dotnet publish'
   - task: DotNetCoreCLI@2
     inputs:
       command: publish
