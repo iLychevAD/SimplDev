@@ -2,6 +2,7 @@
 set -e
 echo "SEDding files"
 sed -i'' -e 's|<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.1" />|<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.0" />|' src/SimplCommerce.WebHost/SimplCommerce.WebHost.csproj
+cat src/SimplCommerce.WebHost/SimplCommerce.WebHost.csproj
 sed -i'' -e 's/UseSqlServer/UseNpgsql/' src/SimplCommerce.WebHost/Program.cs
 sed -i'' -e 's/UseSqlServer/UseNpgsql/' src/SimplCommerce.WebHost/Extensions/ServiceCollectionExtensions.cs
 
